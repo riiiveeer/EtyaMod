@@ -18,3 +18,9 @@
   - task-d-boss → 分支 task/d-boss(梦境 Boss 卡诺斯)
   - task-e-ui → 分支 task/e-ui(歌词演出 UI)
 - 说明:B/C/D/E 分支当前基于 A 完成前的主干,待 A 合入主干后需先合并主干再开工
+
+## 2026-07-04 | 主干,GitHub 协作初始化
+- [新建] GitHub 公开仓库 https://github.com/riiiveeer/EtyaMod ,推送 master 与五个 task 分支
+- [调整] master 开启分支保护:改动须走 PR,禁止直接 push 与强推
+- [调整] 本地五个 task 分支设置远程跟踪(origin/task/*)
+- [新建] README.md:项目简介、分工分支表、协作流程、环境搭建、编码规范摘要
