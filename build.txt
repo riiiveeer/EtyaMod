@@ -1,0 +1,4 @@
+displayName = Story With Etya
+author = CD
+version = 0.1
+hideResources = false

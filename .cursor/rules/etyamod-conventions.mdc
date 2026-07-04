@@ -1,0 +1,33 @@
+---
+description: EtyaMod 项目约定,所有开发任务必须遵守
+alwaysApply: true
+---
+
+# EtyaMod 开发约定
+
+## 必读文档
+- 世界观与角色设定以 `故事背景.md` 为准,不得自行发明或修改设定。
+- 任务范围与里程碑见 `开发计划.md`。
+
+## 目录结构
+- 城镇/剧情 NPC:`NPCs/TownNPCs/`,Boss:`NPCs/Bosses/`
+- 物品:`content/Items/<类别>/<物品名>/`(代码与贴图同目录,如 `content/Items/Weapons/NbSword/`)
+- 世界与剧情进度系统(ModSystem/ModPlayer):`World/`
+- UI:`UI/`
+- 命名空间与目录一致,如 `EtyaMod.NPCs.Bosses`
+
+## 剧情进度(单一事实来源)
+- 所有主线进度、共鸣度等剧情状态只能存在 `World/` 下的 ModSystem/ModPlayer 中,其他模块通过它读写,禁止各自另存进度字段。
+- 修改进度数据结构前,先检查是否已有对应字段,避免重复定义。
+
+## 文本与本地化
+- 所有玩家可见文本一律走 Localization(hjson)键值,禁止在 C# 里硬编码中文(调试用 Main.NewText 除外)。
+- 键名格式:`Mods.EtyaMod.<类别>.<名称>.<条目>`。
+
+## 贴图
+- 每个 ModItem/ModNPC 必须有对应 png,否则模组无法加载。没有美术素材时,复制现有占位贴图(如 `content/Items/Weapons/NbSword/NbSword.png`)改名使用,并在代码中加 `// TODO: 占位贴图` 注释。
+
+## 完成标准
+- 提交前必须通过 `dotnet build` 编译(0 错误)。
+- 不修改 `build.txt`、`EtyaMod.csproj`、`EtyaMod.cs`,除非任务明确要求。
+- API 用当前 tModLoader 1.4.4+ 写法:`ModSystem`(不是 ModWorld)、`AddShops`(不是 SetupShop)。
