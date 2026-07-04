@@ -24,3 +24,7 @@
 - [调整] master 开启分支保护:改动须走 PR,禁止直接 push 与强推
 - [调整] 本地五个 task 分支设置远程跟踪(origin/task/*)
 - [新建] README.md:项目简介、分工分支表、协作流程、环境搭建、编码规范摘要
+
+## 2026-07-04 | task/a-world
+- [新建] 仓库外 `..\tModLoader.targets`(EtyaMod-work 目录下):工作树比常规 ModSources 布局深一层,csproj 里的 `..\tModLoader.targets` 找不到真实 targets 导致编译失败,新建转发文件指向 `ModSources\tModLoader.targets`。各 task-* 工作树共用,无需改动 csproj
+- 任务 A(World/ 剧情进度系统)完成,`dotnet build` 0 错误,详见 World/DEVLOG.md
