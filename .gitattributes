@@ -1,0 +1,2 @@
+# DEVLOG 是只追加的日志:合并冲突时自动保留双方内容,不再需要人工解决
+DEVLOG.md merge=union

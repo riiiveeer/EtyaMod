@@ -28,3 +28,8 @@
 ## 2026-07-04 | task/a-world
 - [新建] 仓库外 `..\tModLoader.targets`(EtyaMod-work 目录下):工作树比常规 ModSources 布局深一层,csproj 里的 `..\tModLoader.targets` 找不到真实 targets 导致编译失败,新建转发文件指向 `ModSources\tModLoader.targets`。各 task-* 工作树共用,无需改动 csproj
 - 任务 A(World/ 剧情进度系统)完成,`dotnet build` 0 错误,详见 World/DEVLOG.md
+
+## 2026-07-05 | 主干,合并任务 A 与 DEVLOG 冲突治理
+- [合并] PR #1(task/a-world → master):剧情进度系统落地,B/C/D/E 可开工
+- [新建] .gitattributes:DEVLOG.md 使用 union 合并策略,追加类冲突自动保留双方
+- [调整] docs-and-devlog 规则:task 分支禁止改总线 DEVLOG.md,任务总结由合并者在合并后补记
