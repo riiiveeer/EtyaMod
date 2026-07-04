@@ -33,3 +33,6 @@
 - [合并] PR #1(task/a-world → master):剧情进度系统落地,B/C/D/E 可开工
 - [新建] .gitattributes:DEVLOG.md 使用 union 合并策略,追加类冲突自动保留双方
 - [调整] docs-and-devlog 规则:task 分支禁止改总线 DEVLOG.md,任务总结由合并者在合并后补记
+
+## 2026-07-05 | 主干,README 更新
+- [修改] README.md:任务 A 状态改为已完成、B/C/D/E 改为可认领;新增进度系统接入指引(接口速查、/etya 指令);协作流程补充 DEVLOG 分支约定;环境搭建补充 worktree 的 tModLoader.targets 转发文件说明

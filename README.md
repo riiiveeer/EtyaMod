@@ -12,21 +12,24 @@
 
 | 任务 | 分支 | 目录 | 内容 | 状态 |
 |------|------|------|------|------|
-| A | `task/a-world` | `World/` | 剧情进度系统(ModSystem/ModPlayer) | **未开工,公共依赖,最先做** |
-| B | `task/b-etya` | `NPCs/TownNPCs/` | Etya 引导者完善 | 等 A 合入 |
-| C | `task/c-items` | `content/Items/` | 记忆碎片、旧 NPC 遗物 | 等 A 合入 |
-| D | `task/d-boss` | `NPCs/Bosses/` | 梦境 Boss 虚言者·卡诺斯 | 等 A 合入 |
-| E | `task/e-ui` | `UI/` | 歌词与演出 UI | 等 A 合入 |
+| A | `task/a-world` | `World/` | 剧情进度系统(ModSystem/ModPlayer) | **已完成,合入主干(PR #1)** |
+| B | `task/b-etya` | `NPCs/TownNPCs/` | Etya 引导者完善 | **可认领** |
+| C | `task/c-items` | `content/Items/` | 记忆碎片、旧 NPC 遗物 | **可认领** |
+| D | `task/d-boss` | `NPCs/Bosses/` | 梦境 Boss 虚言者·卡诺斯 | **可认领** |
+| E | `task/e-ui` | `UI/` | 歌词与演出 UI | **可认领** |
 
 每个模块目录里有 `TODO.md`(待办与验收标准)和 `DEVLOG.md`(改动日志)。认领任务前先看对应 TODO。
+
+**接入剧情进度系统(所有任务都会用到):** 世界侧进度读 `WorldTruthSystem`,玩家侧数据读 `EtyaModPlayer`(命名空间 `EtyaMod.World`),用法示例见这两个文件头部的【接入指南】注释,接口速查表见 [World/TODO.md](World/TODO.md)。游戏内可用 `/etya` 聊天指令查看和调试进度(`/etya status` 等,用法见 `World/EtyaDebugCommand.cs` 文件头)。
 
 ## 协作流程
 
 1. **认领**:在群里或 Issue 里说一声你要做哪个任务,避免撞车。
 2. **开发**:协作者直接在对应 `task/*` 分支上开发;非协作者 fork 后从 `task/*` 分支切出去做。
-3. **B/C/D/E 开工前**:先 `git merge master` 拿到任务 A 的进度系统接口(A 合入主干后)。
+3. **开工前**:先 `git merge master` 保证分支基于最新主干。
 4. **合并**:完成一小块就向 `master` 发 Pull Request,不要攒大改动。`master` 受保护,任何人(包括仓库主)都不应直接 push。
 5. **PR 要求**:`dotnet build` 通过 0 错误;改动已记入所在模块 DEVLOG.md;新文本走 Localization 不硬编码。
+6. **DEVLOG 约定**:task 分支上只写自己模块目录的 DEVLOG.md,**不要改根目录的总线 DEVLOG.md**(任务总结由合并者在合并后补记)。即使不小心改了,DEVLOG 已配置 union 合并策略,一般也不会产生冲突。
 
 ## 本地开发环境
 
@@ -34,6 +37,15 @@
 2. 把仓库 clone 到 `文档/My Games/Terraria/tModLoader/ModSources/EtyaMod`(目录名必须是 EtyaMod)。
 3. 用 Visual Studio / Rider / VS Code 打开 `EtyaMod.sln`,或直接 `dotnet build` 验证编译。
 4. 游戏内 Mods → Develop Mods 可构建并热加载测试。
+
+**用 git worktree 并行开发时的注意事项:** worktree 若放在 `ModSources/EtyaMod-work/<任务名>/` 这类深一层的目录,csproj 里的 `..\tModLoader.targets` 会指向 `EtyaMod-work/` 而找不到真实文件,导致编译失败。解决办法:在 `EtyaMod-work/` 下新建一个转发用的 `tModLoader.targets`,内容如下(所有 worktree 共用,无需改 csproj):
+
+```xml
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- 工作树目录比常规 ModSources 布局深一层,转发到真正的 targets -->
+  <Import Project="..\tModLoader.targets" />
+</Project>
+```
 
 ## 编码规范(摘要)
 
