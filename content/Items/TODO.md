@@ -23,6 +23,7 @@
   - `EtyaMod.content.Items.Relics.GuideEmblem` — 向导的徽章(低血量减伤)
   - `EtyaMod.content.Items.Relics.AnglerBaitBox` — 渔夫的鱼饵盒(渔力加成)
 - **遗物共鸣**:三件遗物是饰品(accessory),在 `UpdateAccessory` 中每帧调 `player.GetModPlayer<EtyaModPlayer>().RegisterEquippedRelic()`(见 `World/EtyaModPlayer.cs` 文件头接入指南)。
+- **碎片掉落**(2026-07-05 定案,见《故事背景.md》第二节):肉山前原版 Boss 是"幻象回响",击败后掉落记忆碎片(它们本身就是记忆)。用 `GlobalNPC` 给克眼/世吞/克脑/骷髅王/史莱姆王/蜂后注入 1~3 个 MemoryShard 掉落,文件放 `content/Items/Quest/MemoryShardDrops.cs`。
 - **本任务无外部依赖,是 B/D 的被依赖方,应最先完成合入主干**,解锁 B/D 的占位替换。
 
 ## 验收标准

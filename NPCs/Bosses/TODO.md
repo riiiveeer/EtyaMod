@@ -18,9 +18,14 @@
 
 ## 跨模块契约(2026-07-05 定稿,并行开发期间不得更改)
 
-- **类名**:Boss 本体 `EtyaMod.NPCs.Bosses.Kanos`;召唤物 `EtyaMod.NPCs.Bosses.KanosDreamCharm`("护符残片·向导",归本任务所有,放本目录,不放 content/Items/)。
-- **胜利判定**(仅服务端/单人调用):`ModContent.GetInstance<WorldTruthSystem>().CompleteDream(DreamBoss.Kanos)`;参战玩家 `GetModPlayer<EtyaModPlayer>().UnlockAbility("PhantomStep")`(幻影步的实际闪避机制本期不实现,只解锁能力键)。
+- **类名**(均归本任务所有,放本目录,不放 content/Items/):
+  - Boss 本体 `EtyaMod.NPCs.Bosses.Kanos`
+  - 召唤物 `EtyaMod.NPCs.Bosses.KanosDreamCharm`("护符残片·向导",进入梦境战)
+  - 战利品 `EtyaMod.NPCs.Bosses.LiarsPuppet`("虚言者的傀儡",扔入熔岩召唤肉山,2026-07-05 定案,替代原版向导巫毒娃娃流程)
+- **胜利判定**(仅服务端/单人调用):`ModContent.GetInstance<WorldTruthSystem>().CompleteDream(DreamBoss.Kanos)`;参战玩家 `GetModPlayer<EtyaModPlayer>().UnlockAbility("PhantomStep")` 和 `UnlockAbility("SummonUnlocked")`(幻影步机制与召唤解锁的实际拦截逻辑均属后续任务,本期只写能力键)。
+- **能力键约定**(全项目统一):`"PhantomStep"` 幻影步、`"SummonUnlocked"` 召唤解锁、`"MagicUnlocked"` 魔法解锁(后者由后续职业解锁任务使用)。
 - **掉落记忆碎片**:类名 `EtyaMod.content.Items.Quest.MemoryShard`(任务 C 实现)。**C 合入主干前禁止直接引用**,掉落先用原版物品 `ItemID.FallenStar` 占位,标注 `// TODO(契约): C 合入后替换为 ModContent.ItemType<MemoryShard>()`。
+- **范围简化(稳健)**:梦境副本的"传送到隔离区域"本期可简化为原地召唤开战,在 TODO 留遗留项;肉山召唤可实现为傀儡入熔岩生成肉山(参考原版巫毒娃娃机制)。
 - **合并顺序**:C 先合入主干,D 替换占位后再合入。
 
 ## 验收标准
