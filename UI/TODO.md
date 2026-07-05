@@ -16,6 +16,11 @@
   - [ ] 《熄灭的炉火》(击败首个 Boss 后)
 - [ ] 后续预留:真相揭示演出(屏幕滤镜/背景切换),本期不做
 
+## 跨模块契约(2026-07-05 定稿,并行开发期间不得更改)
+
+- **公共入口**:`EtyaMod.UI.SongUI.Play(string songKey)`(公共静态方法),任务 B 的对话演出将按此签名调用,不得更改。
+- **歌词键**:`Mods.EtyaMod.Songs.<歌名>.<行号>`,如 `Mods.EtyaMod.Songs.DistantBell.1`。
+
 ## 验收标准
 
 - `dotnet build` 通过,进游戏可通过调试指令触发歌词演出
